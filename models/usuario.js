@@ -41,7 +41,7 @@ let usuarioSchema = new Schema({
     default: false,
   },
 });
-// no mastramos loa paswor cada vez que el objeto pase a un json;
+// no mastramos la paswor cada vez que el objeto pase a un json;
 usuarioSchema.methods.toJSON = function() {
   let user = this;
   let userObject = user.toObject();
@@ -49,6 +49,6 @@ usuarioSchema.methods.toJSON = function() {
   return userObject;
 };
 
-usuarioSchema.plugin(uniqueValidator, {message: '{PATH} deve de ser unico'});
+usuarioSchema.plugin(uniqueValidator, {message: '{PATH } deve de ser unico'});
 
 module.exports = mongoose.model('Usuario',  usuarioSchema);

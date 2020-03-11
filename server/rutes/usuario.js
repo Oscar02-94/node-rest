@@ -10,12 +10,15 @@ const app = express();
 
 const Usuario = require('../../models/usuario');
 
-app.get('/usuario', function(req, res) {
+//mideelware de autenticacion
+const { verificaToken, VerficaAdmin_Rol} = require('../middelware/autenticacio');
 
+app.get('/usuario', verificaToken, (req, res) => {
+   
   let desde = req.query.desde || 0;
   desde = Number(desde);
 
-  let limite = req.query.limite || 2;
+  let limite = req.query.limite || 5;
   limite = Number(limite);
 
   Usuario.find({estado: true}, 'nombre email img role estado google')
@@ -28,7 +31,7 @@ app.get('/usuario', function(req, res) {
           err,
         });
       }
-      Usuario.count({ estado: true}, (err, conteoDeUSers)=> {
+      Usuario.count({ estado: true}, (err, conteoDeUSers) => {
         res.json({
           ok: true,
           usuarios,
@@ -38,7 +41,7 @@ app.get('/usuario', function(req, res) {
     });
 });
 
-app.post('/usuario', function(req, res) {
+app.post('/usuario', [verificaToken, VerficaAdmin_Rol], (req, res) => {
   let body = req.body;
   let usuario = new Usuario({
     nombre: body.nombre,
@@ -62,7 +65,7 @@ app.post('/usuario', function(req, res) {
   });
 });
 
-app.put('/usuario/:id', function(req, res) {
+app.put('/usuario/:id', [verificaToken, VerficaAdmin_Rol],(req, res)  => {
   let id = req.params.id;
   let body = _.pick(req.body,  ['nombre', 'email', 'img', 'role', 'estado']);
 
@@ -82,7 +85,7 @@ app.put('/usuario/:id', function(req, res) {
     });
 });
 
-app.delete('/usuario/:id', function(req, res) {
+app.delete('/usuario/:id',[verificaToken, VerficaAdmin_Rol], (req, res) => {
   let id = req.params.id;
 
   let cambiaEstado = {
