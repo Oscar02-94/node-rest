@@ -18,7 +18,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev'
 // 60 minutos
 // 24 horas
 // 30 dias
-process.env.CADUIDAD_TOKEN =  60*60*24*30
+process.env.CADUCIDAD_TOKEN =  60*60*24*30
 
 // =================================0
 // semilla
@@ -28,6 +28,11 @@ process.env.SEED = process.env.SEED || 'este-es-el-seed-desarrollo';
 
 
 
+//==================================
+//google client
+//==================================
+
+process.env.ID_CLIENTE = process.env.ID_CLIENTE || '574434005600-d5q8tr9ej5r0rtl0aavl2lgvcgit2p84.apps.googleusercontent.com'
 
 
 let urlDB;

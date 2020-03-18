@@ -56,6 +56,11 @@ let VerficaAdmin_Rol =(req, res, next) => {
     
 };
 
+
+
+
+
+
 module.exports ={
     verificaToken,
     VerficaAdmin_Rol
