@@ -23,9 +23,9 @@ app.post('/login', (req, res) => {
 
     let body = req.body;
 
-    Usuario.findOne({email: body.email} ,(err, usuarioDB) => {
+    Usuario.findOne({email: body.email}, (err, usuarioDB) => {
         if(err) {
-            return res.status(400).json({
+            return res.status(500).json({
                 ok: true,
                 err
             });
@@ -52,12 +52,12 @@ app.post('/login', (req, res) => {
 
        let token = jwt.sign({
            // el payload es todo el usuario de db
-           Usuario: usuarioDB 
-       }, process.env.SEED , { expiresIn:process.env.CADUCIDAD_TOKEN});
+           usuario: usuarioDB 
+       }, process.env.SEED , { expiresIn: process.env.CADUCIDAD_TOKEN});
 
        res.json({
         ok: true,
-        Usuario: usuarioDB,
+        usuario: usuarioDB,
         token
         });
 
@@ -67,7 +67,7 @@ app.post('/login', (req, res) => {
 });
 
 
-// configuracion de google
+// configuracion de google autenticacion
 
 
 async function verify(token) {

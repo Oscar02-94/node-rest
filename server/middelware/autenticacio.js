@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 
 let verificaToken = (req, res, next) => {
     
-    let token = req.get('token');
+    let token = req.get('token'); //con este let token = req.get('token') es para saver  puedo acceder al header donde esta alojado el
 
     jwt.verify(token, process.env.SEED, (err, decoded) => {
         if(err) {
@@ -20,7 +20,8 @@ let verificaToken = (req, res, next) => {
             });
         }
         
-        req.usuario = decoded.Usuario
+        req.usuario = decoded.usuario
+        // console.log(decoded.usuario,'=========>')
         //console.log(decoded);
         next();
         
