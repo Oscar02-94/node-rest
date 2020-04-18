@@ -57,6 +57,32 @@ let VerficaAdmin_Rol =(req, res, next) => {
     
 };
 
+//==================================
+//VERIFICA TOKEN PARA IMAGEN
+//==================================
+
+let VerificaTokenImg =(req, res, next) => {
+    
+    const token = req.query.token;
+    
+    jwt.verify(token, process.env.SEED, (err, decoded) => {
+        if(err) {
+            return res.status(401).json({
+                ok: false,
+                err:{
+                    message: 'token no valido'
+                }
+            });
+        }
+        
+        req.usuario = decoded.usuario
+        // console.log(decoded.usuario,'=========>')
+        //console.log(decoded);
+        next();
+        
+    })
+}
+
 
 
 
@@ -64,5 +90,6 @@ let VerficaAdmin_Rol =(req, res, next) => {
 
 module.exports ={
     verificaToken,
-    VerficaAdmin_Rol
+    VerficaAdmin_Rol,
+    VerificaTokenImg
 }

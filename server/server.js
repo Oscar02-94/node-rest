@@ -7,7 +7,7 @@ const express = require('express');
 
 const mongoose = require('mongoose');
 
-const paht = require('path'); 
+const path = require('path'); 
 
 const app = express();
 
@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 // parse application/json
 app.use(bodyParser.json());
 
-app.use(express.static(paht.resolve(__dirname,'../public')));
+app.use(express.static(path.resolve(__dirname,'../public')));
 
 // configuracion global de rutas
 app.use(require('./rutes/index'));

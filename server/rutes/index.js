@@ -11,5 +11,8 @@ app.use(require('./categoria'));
 
 app.use(require('./producto'));
 
+app.use(require('./uploade'));
+
+app.use(require('./imagenes'));
 
 module.exports = app;
